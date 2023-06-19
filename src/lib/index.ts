@@ -26,13 +26,14 @@ export type UnwrapEffects<T> = T extends ZodEffects<infer U>
   ? T
   : never;
 
-export type ZodValidation<T extends AnyZodObject> =
+export type DrainOuterGeneric<T> = [T] extends [unknown] ? T : never
+export type ZodValidation<T extends AnyZodObject> = DrainOuterGeneric<
   | T
   | ZodEffects<T>
   | ZodEffects<ZodEffects<T>>
   | ZodEffects<ZodEffects<ZodEffects<T>>>
   | ZodEffects<ZodEffects<ZodEffects<ZodEffects<T>>>>
-  | ZodEffects<ZodEffects<ZodEffects<ZodEffects<ZodEffects<T>>>>>;
+  | ZodEffects<ZodEffects<ZodEffects<ZodEffects<ZodEffects<T>>>>>>;
 
 export { type FormPath, type FormPathLeaves } from './stringPath.js';
 
