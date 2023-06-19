@@ -4,7 +4,8 @@ import {
   SuperFormError,
   type SuperValidated,
   type ZodValidation,
-  type UnwrapEffects
+  type UnwrapEffects,
+  type DrainOuterGeneric
 } from './index.js';
 import {
   entityData,
@@ -39,7 +40,7 @@ export { defaultValues } from './schemaEntity.js';
  * form.valid to false if status >= 400. A status lower than 400 cannot be sent.
  */
 export function message<T extends ZodValidation<AnyZodObject>, M>(
-  form: SuperValidated<T, M>,
+  form: DrainOuterGeneric<SuperValidated<T, M>>,
   message: M,
   options?: {
     status?: NumericRange<400, 599>;

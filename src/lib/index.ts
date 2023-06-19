@@ -146,10 +146,10 @@ export type InputConstraints<T extends AnyZodObject> = SuperStruct<
 >;
 
 export type SuperValidated<
-  T extends ZodValidation<AnyZodObject>,
+  T extends DrainOuterGeneric<ZodValidation<AnyZodObject>>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   M = any
-> = {
+> = DrainOuterGeneric<{
   valid: boolean;
   posted: boolean;
   errors: ValidationErrors<UnwrapEffects<T>>;
@@ -157,7 +157,7 @@ export type SuperValidated<
   constraints: Entity<UnwrapEffects<T>>['constraints'];
   message?: M;
   id?: string;
-};
+}>;
 
 /**
  * @deprecated Use SuperValidated instead.
