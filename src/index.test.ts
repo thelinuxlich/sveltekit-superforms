@@ -740,12 +740,12 @@ test('Schema with pipe()', async () => {
 
   const formData4 = new FormData();
   formData4.set('len', 'four');
-  formData4.set('date', '2023-05-28');
+  formData4.set('date', '2023-05-28T00:00:00Z');
   formData4.set('num', '123');
   const form4 = await superValidate(formData4, schema);
   assert(form4.valid === false);
   expect(form4.data.len).toBeNaN();
-  expect(form4.data.date.getDate()).toEqual(28);
+  expect(form4.data.date.getUTCDate()).toEqual(28);
   expect(form4.data.num).toEqual(123);
 });
 
